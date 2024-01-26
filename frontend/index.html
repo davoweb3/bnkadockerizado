@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Interface</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://bnka.com/assets/css/landing/styles.min.css" type="text/css" rel="stylesheet" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="https://bnka.com/assets/bnka_v2/css/styles.min.css" type="text/css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        form {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #495057;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #e00588;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+
+ <img src="https://bnka.com/assets/media/logo_2.svg" alt="Logo" style="position: absolute; top: 10px; left: 10px; height: 50px; width: auto;">
+<body>
+    <h1>Interface Básica de Banco </h1>
+    
+    
+    <!-- Formulario de crear usuario -->
+    <form action="process.php" method="post">
+        <h2>Crear Usuario</h2>
+        <label for="createUsername">Username:</label>
+        <input type="text" id="createUsername" name="createUsername"  required>
+
+        <label for="createNombres">Nombres:</label>
+        <input type="text" id="createNombres" name="createNombres" required>
+
+        <label for="createEmail">Email:</label>
+        <input type="email" id="createEmail" name="createEmail" required>
+
+        <label for="createPassword">Password:</label>
+        <input type="password" id="createPassword" name="createPassword" required>
+
+        <label for="createCuenta">Cuenta:</label>
+        <input type="text" id="createCuenta" name="createCuenta" required>
+
+        <label for="createSaldo">Saldo:</label>
+        <input type="text" id="createSaldo" name="createSaldo" required>
+
+        <button type="submit" name="createUser" class="btn">Crear Usuario</button>
+        
+    </form>
+    
+    <script>
+        function validateForm() {
+            var emailInput = document.getElementById('createEmail');
+            var emailValue = emailInput.value;
+
+            // Validamos con una regex
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(emailValue)) {
+                alert('Por favor, ingresa un correo electrónico válido.');
+                return false; // Evita el envío del formulario si la validación falla
+            }
+
+            // Si la validación es exitosa seguimos
+            return true;
+        }
+    </script>
+
+<script>
+    function validateForm() {
+      
+
+        // Validación adicional para el nombre de usuario
+        var usernameInput = document.getElementById('createUsername');
+        var usernameValue = usernameInput.value;
+
+        
+        document.getElementById('usernameError').innerHTML = '';
+
+        // Realiza una verificación adicional antes de enviar el formulario
+        if (usernameValue === '') {
+            alert('Por favor, ingresa un nombre de usuario.');
+            return false;
+        }
+
+        return true;
+    }
+</script>
+    
+
+<!-- --------------------Fin de crear usuario--------------------------------------- -->
+
+    <!-- Formulario para obtener un usuario por ID OK -->
+    <form action="getters.php" method="get">
+        <h2>Obtener Usuario</h2>
+        <label for="getUserId">User ID:</label>
+        <input type="number" id="getUserId" name="getUserId" required>
+
+        <button type="submit" name="getUser" class="btn">Obtener Usuario</button>
+    </form>
+
+    <!-- Formulario para Actualizar un usuario OK -->
+    <form action="process.php" method="post">
+        <h2>Actualizar Usuario</h2>
+        <label for="updateUserId">User ID:</label>
+        <input type="number" id="updateUserId" name="updateUserId" required>
+
+        <label for="updateNombres">Nombres:</label>
+        <input type="text" id="updateNombres" name="updateNombres">
+
+        <label for="updateEmail">Email:</label>
+        <input type="email" id="updateEmail" name="updateEmail">
+
+        <button type="submit" name="updateUser" class="btn">Actualizar</button>
+    </form>
+
+    <!-- Eliminar Usuario  OK -->
+    <form action="process.php" method="post">
+        <h2>Eliminar Usuario</h2>
+        <label for="deleteUserId">User ID:</label>
+        <input type="number" id="deleteUserId" name="deleteUserId" required>
+
+        <button type="submit" name="deleteUser" class="btn">Eliminar Usuario</button>
+    </form>
+
+    <!-- Listar todos los usuarios OK -->
+    <form action="getters.php" method="get">
+        <h2>Listar todos los usuarios </h2>
+
+        <button type="submit" name="listUsers" class="btn">Listar todos los usuarios</button>
+    </form>
+
+    <!-- Formulario para transferir usando usuarios -->
+   <!-- Formulario para transferir usando usuarios -->
+   <form action="process.php" method="post" onsubmit="return validateTransferForm()">
+    <h2>Realizar Transferencias entre usuarios</h2>
+    <label for="transferRemitente">Usuario remitente:</label>
+    <input type="text" id="transferRemitente" name="transferRemitente" required>
+
+    <label for="transferBeneficiario">Usuario beneficiario:</label>
+    <input type="text" id="transferBeneficiario" name="transferBeneficiario" required>
+
+    <label for="transferAmount">Cantidad:</label>
+    <input type="text" id="transferAmount" name="transferAmount" required oninput="calculateTotal()">
+
+    <div id="totalAlert" style="display: none;"></div>
+
+    <button type="submit" name="transferBalance" class="btn">Transferir</button>
+</form>
+
+
+<!-- //Validar cantidad no negativa // -->
+<script>
+    function validateTransferForm() {
+        // Get the transfer amount input field
+        var transferAmountInput = document.getElementById('transferAmount');
+        var transferAmountValue = parseFloat(transferAmountInput.value);
+
+        // Check if the transfer amount is a valid number and not negative
+        if (isNaN(transferAmountValue) || transferAmountValue < 0) {
+            alert('Por favor, ingresa una cantidad válida y/o no negativa para la transferencia.');
+            return false; // Prevent form submission
+        }
+
+        // If the validation is successful, allow form submission
+        return true;
+    }
+</script>
+<!-- Validacion y aviso al cliente antes de trasnferir -->
+<script>
+    function calculateTotal() {
+        // Get the transfer amount input field
+        var transferAmountInput = document.getElementById('transferAmount');
+        var transferAmountValue = parseFloat(transferAmountInput.value);
+
+        // Check if the transfer amount is a valid number and not negative
+        if (!isNaN(transferAmountValue) && transferAmountValue >= 0) {
+            var total = transferAmountValue * 1.02;
+            document.getElementById('totalAlert').innerHTML = 'El total a debitarse de tu cuenta será: ' + total.toFixed(2) ;
+            document.getElementById('totalAlert').style.display = 'block';
+        } else {
+            document.getElementById('totalAlert').style.display = 'none';
+        }
+    }
+</script>
+
+
+    <!-- Formulario para depositar a un usuario -->
+    <form action="process.php" method="post" onsubmit="return validateDepositForm()">
+        <h2>Depositar</h2>
+        <label for="depositUsername">Usuario:</label>
+        <input type="text" id="depositUsername" name="depositUsername" required>
+    
+        <label for="depositAmount">Cantidad:</label>
+        <input type="text" id="depositAmount" name="depositAmount" required>
+    
+        <button type="submit" name="deposit" class="btn">Depositar</button>
+    </form>
+
+    <script>
+        function validateDepositForm() {
+            // Get the deposit amount input field
+            var depositAmountInput = document.getElementById('depositAmount');
+            var depositAmountValue = parseFloat(depositAmountInput.value);
+    
+            // Check if the deposit amount is a valid number and not negative
+            if (isNaN(depositAmountValue) || depositAmountValue < 0) {
+                alert('Por favor, ingresa una cantidad válida y no negativa.');
+                return false; // Prevent form submission
+            }
+    
+            // If the validation is successful, allow form submission
+            return true;
+        }
+    </script>
+
+    
+
+</body>
+</html>
