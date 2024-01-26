@@ -44,9 +44,9 @@ Esta pendiente levantar los servicios ECS en AWS.
 ## Ejecucion 
 -Clonar este repo
 -Pull a los contenedores en el registro publico de mi cuenta de docker hub
-docker push davotrade/mysql:tagname      
-docker push davotrade/bnkacontainer_frontend:tagname
-docker push davotrade/bnkacontainer_backend:tagname
+#docker push davotrade/mysql:tagname      
+#docker push davotrade/bnkacontainer_frontend:tagname
+#docker push davotrade/bnkacontainer_backend:tagname
 
 Los contenedores ya estan interconectados para una ejecucion local desde Docker Desktop
 
